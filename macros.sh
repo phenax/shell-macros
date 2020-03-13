@@ -1,17 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-PACKAGES_CONFIG_PATH="$HOME/.config/pkg-install-packages";
+MACROS_PATH="$HOME/.config/shell-macros";
 
-DUMP_PATH="$PACKAGES_CONFIG_PATH/dump";
-PACKAGE_LIST_PATH="$PACKAGES_CONFIG_PATH/macros";
-SHELL="bash";
+source "$MACROS_PATH/config.sh";
 
-setup() {
-  mkdir -p "$DUMP_PATH";
-  mkdir -p "$PACKAGE_LIST_PATH";
-}
-
-get-macro-path() { echo "$PACKAGE_LIST_PATH/$1"; }
+get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
 
 guard() { if [[ -z "$1" ]]; then echo "$2"; exit 1; fi; }
 guard-package-name() { guard "$1" "Invalid package name"; }
@@ -44,15 +37,10 @@ run() {
   # TODO: Execute the stream of commands (| $SHELL -)
 }
 
-run-all() { ls -1 | xargs run; }
-
-
-setup;
 
 case "$1" in
   start) record "$2" ;;
   run) run "$2" ;;
-  all) run-all ;;
   delete) delete "$2" ;;
   stop) exit ;;
   help) echo "Docs not implemented" ;;
