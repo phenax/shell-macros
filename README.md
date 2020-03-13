@@ -27,7 +27,6 @@ macros help
 ```
 Commands:
   start <macro name>    - Creates a new macro recording session
-  stop                  - Stop recording (exit)
   run <macro name>      - Run a recorded macro
   ls                    - List all available macros
   delete <macro name>   - Delete a macro
@@ -44,9 +43,9 @@ macros start git_sync_staging
 This will give you a new shell session to start executing your macro in.
 So you can go ahead and run your set of commands.
 
-When you are done, just run the `macros stop` or `exit` command to save and exit out of the session.
+When you are done, just run `exit` command to save and exit out of the session.
 ```bash
-macros stop
+exit
 ```
 
 #### Execute a macro

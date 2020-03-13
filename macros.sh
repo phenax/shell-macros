@@ -9,7 +9,6 @@ HELP_TEXT="Usage: macros [command] <args>
 
 Commands:
   start <macro name>    - Creates a new macro recording session
-  stop                  - Stop recording (exit)
   run <macro name>      - Run a recorded macro
   ls                    - List all available macros
   delete <macro name>   - Delete a macro
@@ -54,7 +53,6 @@ run() {
 
 case "$1" in
   start) record "$2" ;;
-  stop) exit ;;
 
   run) run "$2" ;;
 
