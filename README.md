@@ -48,7 +48,7 @@ When you are done, just run `exit` command to save and exit out of the session.
 exit
 ```
 
-#### Execute a macro
+#### Executing a macro
 
 You can run your macro using the `macros run <name>` command
 ```bash
@@ -56,14 +56,14 @@ macros run git_sync_staging
 ```
 
 
-#### For bash
+#### Adapter for bash
 Add this to the bottom of your `~/.bashrc`
 ```bash
-source ~/.shell-macros/adapters/bash;
+source $HOME/.shell-macros/adapters/bash;
 ```
 
-#### For zsh
+#### Adapter for zsh
 Add this to the bottom of your `~/.zshrc`
 ```bash
-source ~/.shell-macros/adapters/zsh;
+source $HOME/.shell-macros/adapters/zsh;
 ```
