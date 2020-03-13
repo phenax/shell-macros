@@ -2,6 +2,7 @@
 
 MACROS_PATH="$HOME/.config/shell-macros";
 
+source "$MACROS_PATH/default_config.sh";
 source "$MACROS_PATH/config.sh";
 
 get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
