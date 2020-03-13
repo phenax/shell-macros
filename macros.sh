@@ -34,10 +34,11 @@ run() {
 
   [[ ! -f "$pkgPath" ]] && guard "" "Macro '$1' does not exist";
 
-  cat $pkgPath | sed 's/^[0-9: ]\+;//g' | sed '/^(macros )?exit$/d';
-  # TODO: Execute the stream of commands (| $SHELL -)
+  local currentDir=$(pwd);
+  cd "$DUMP_PATH";
+  cat $pkgPath | sed 's/^[0-9: ]\+;//g' | sed '/^(macros )?exit$/d' | $SHELL -;
+  cd "$currentDir";
 }
-
 
 case "$1" in
   start) record "$2" ;;
