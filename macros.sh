@@ -5,6 +5,7 @@ MACROS_PATH="$HOME/.config/shell-macros";
 source "$MACROS_PATH/default_config.sh";
 source "$MACROS_PATH/config.sh";
 
+list() { ls -1 $MACROS_LIST_PATH; }
 get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
 
 guard() { if [[ -z "$1" ]]; then echo "$2"; exit 1; fi; }
@@ -42,9 +43,13 @@ run() {
 
 case "$1" in
   start) record "$2" ;;
-  run) run "$2" ;;
-  delete) delete "$2" ;;
   stop) exit ;;
+
+  run) run "$2" ;;
+
+  ls) list ;;
+
+  delete) delete "$2" ;;
   help) echo "Docs not implemented" ;;
 esac
 
