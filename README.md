@@ -1,4 +1,4 @@
-# shell-macros
+# Shell Macros
 Write command line macros in bash and zsh
 
 ## Prerequisites
@@ -23,7 +23,7 @@ Run the help command to see the list of available commands
 macros help
 ```
 
-### Commands
+#### Commands
 ```
 Commands:
   start <macro name>    - Creates a new macro recording session
@@ -34,13 +34,13 @@ Commands:
   help                  - This dialog
 ```
 
-### For bash
+#### For bash
 Add this to the bottom of your `~/.bashrc`
 ```bash
 source ~/.shell-macros/adapters/bash;
 ```
 
-### For zsh
+#### For zsh
 Add this to the bottom of your `~/.zshrc`
 ```bash
 source ~/.shell-macros/adapters/zsh;
