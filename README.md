@@ -34,6 +34,29 @@ Commands:
   help                  - This dialog
 ```
 
+#### Recording a macro
+
+To generate a macro use the `macros start <name>` command
+```bash
+macros start git_sync_staging
+```
+
+This will give you a new shell session to start executing your macro in.
+So you can go ahead and run your set of commands.
+
+When you are done, just run the `macros stop` or `exit` command to save and exit out of the session.
+```bash
+macros stop
+```
+
+#### Execute a macro
+
+You can run your macro using the `macros run <name>` command
+```bash
+macros run git_sync_staging
+```
+
+
 #### For bash
 Add this to the bottom of your `~/.bashrc`
 ```bash
