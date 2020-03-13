@@ -20,9 +20,7 @@ record() {
   guard-package-name "$1";
   local pkgPath=$(get-macro-path "$1");
 
-  if [[ -f "$pkgPath" ]]; then
-    echo "Macro: '$1' already exists. To delete it, run 'macros delete $1'";
-  fi
+  [[ -f "$pkgPath" ]] && guard "" "Macro: '$1' already exists. To delete it, run 'macros delete $1'";
 
   local currentDir=$(pwd);
   cd "$DUMP_PATH";
@@ -50,9 +48,9 @@ setup;
 case "$1" in
   start) record "$2" ;;
   run) run "$2" ;;
-  delete) delete "$2" ;;
   all) run-all ;;
-  exit) exit ;;
+  delete) delete "$2" ;;
+  stop) exit ;;
   help) echo "Docs not implemented" ;;
 esac
 
