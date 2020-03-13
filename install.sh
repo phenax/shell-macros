@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SHELL_MACROS_PATH=$HOME/.config/shell-macros;
+SHELL_BIN=/usr/bin/macros;
 
 clone() {
   git clone https://github.com/phenax/shell-macros.git $SHELL_MACROS_PATH;
@@ -20,9 +21,9 @@ if [[ -d "$SHELL_MACROS_PATH" ]]; then
   echo "";
 
   echo "* Restoring config...";
-  cp -rf "$TMP_SM_PATH/dump" "$SHELL_MACROS_PATH/dump";
-  cp -rf "$TMP_SM_PATH/macros" "$SHELL_MACROS_PATH/macros";
-  cp -rf "$TMP_SM_PATH/config.sh" "$SHELL_MACROS_PATH/config.sh";
+  cp -rf "$TMP_SM_PATH/dump" "$SHELL_MACROS_PATH";
+  cp -rf "$TMP_SM_PATH/macros" "$SHELL_MACROS_PATH";
+  cp -rf "$TMP_SM_PATH/config.sh" "$SHELL_MACROS_PATH";
 else
   echo "* Installing...";
   clone;
@@ -35,7 +36,9 @@ rm -rf $SHELL_MACROS_PATH/.git;
 echo "";
 
 echo "* Configuring binary...";
-sudo ln -s "$SHELL_MACROS_PATH/macros.sh" /usr/bin/macros;
+if [[ ! -f "$SHELL_BIN" ]]; then
+  sudo ln -s "$SHELL_MACROS_PATH/macros.sh" "$SHELL_BIN";
+fi
 echo "";
 
 echo "Done!";
