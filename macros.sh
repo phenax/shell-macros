@@ -5,6 +5,17 @@ MACROS_PATH="$HOME/.config/shell-macros";
 source "$MACROS_PATH/default_config.sh";
 source "$MACROS_PATH/config.sh";
 
+HELP_TEXT="Usage: macros [command] <args>
+
+Commands:
+  start <macro name>    - Creates a new macro recording session
+  stop                  - Stop recording (exit)
+  run <macro name>      - Run a recorded macro
+  ls                    - List all available macros
+  delete <macro name>   - Delete a macro
+  help                  - This dialog
+";
+
 list() { ls -1 $MACROS_LIST_PATH; }
 get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
 
@@ -50,6 +61,6 @@ case "$1" in
   ls) list ;;
 
   delete) delete "$2" ;;
-  help) echo "Docs not implemented" ;;
+  *) echo -e "$HELP_TEXT" ;;
 esac
 
