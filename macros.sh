@@ -52,13 +52,10 @@ run() {
 }
 
 case "$1" in
-  start) record "$2" ;;
-
-  run) run "$2" ;;
-
-  ls) list ;;
-
-  delete) delete "$2" ;;
-  *) echo -e "$HELP_TEXT" ;;
+  start)   record "$2" ;;
+  run)     run "$2" ;;
+  ls)      list ;;
+  delete)  delete "$2" ;;
+  *)       echo -e "$HELP_TEXT" ;;
 esac
 

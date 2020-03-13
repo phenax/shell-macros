@@ -9,7 +9,6 @@ sudo apt install git curl
 
 
 ## Installation
-
 To install this, just run this script
 ```bash
 curl https://raw.githubusercontent.com/phenax/shell-macros/master/install.sh | bash -
@@ -17,7 +16,6 @@ curl https://raw.githubusercontent.com/phenax/shell-macros/master/install.sh | b
 
 
 ## Usage
-
 Run the help command to see the list of available commands
 ```bash
 macros help
@@ -34,7 +32,6 @@ Commands:
 ```
 
 #### Recording a macro
-
 To generate a macro use the `macros start <name>` command
 ```bash
 macros start git_sync_staging
@@ -49,7 +46,6 @@ exit
 ```
 
 #### Executing a macro
-
 You can run your macro using the `macros run <name>` command
 ```bash
 macros run git_sync_staging
