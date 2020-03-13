@@ -4,7 +4,7 @@ PACKAGES_CONFIG_PATH="$HOME/.config/pkg-install-packages";
 
 DUMP_PATH="$PACKAGES_CONFIG_PATH/dump";
 PACKAGE_LIST_PATH="$PACKAGES_CONFIG_PATH/macros";
-SHELL_NAME="bash";
+SHELL="bash";
 
 setup() {
   mkdir -p "$DUMP_PATH";
@@ -24,7 +24,7 @@ record() {
 
   local currentDir=$(pwd);
   cd "$DUMP_PATH";
-  HISTFILE="$pkgPath" CUSTOM_PROMPT=">> " $SHELL_NAME;
+  HISTFILE="$pkgPath" CUSTOM_PROMPT=">> " $SHELL;
   cd "$currentDir";
 }
 
@@ -37,7 +37,11 @@ delete() {
 run() {
   guard-package-name "$1";
   local pkgPath=$(get-macro-path "$1");
+
+  [[ ! -f "$pkgPath" ]] && guard "" "Macro '$1' does not exist";
+
   cat $pkgPath | sed 's/^[0-9: ]\+;//g' | sed '/^(macros )?exit$/d';
+  # TODO: Execute the stream of commands (| $SHELL -)
 }
 
 run-all() { ls -1 | xargs run; }
