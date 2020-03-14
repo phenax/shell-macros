@@ -9,7 +9,7 @@ sudo apt install git curl
 
 
 ## Installation
-To install this, just run this script
+To install `macros`, run this script
 ```bash
 curl https://raw.githubusercontent.com/phenax/shell-macros/master/install.sh | bash -
 ```
