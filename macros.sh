@@ -42,7 +42,7 @@ record() {
   local macro_path=$(get-macro-path "$1");
 
   # Start new shell
-  HISTFILE="$macro_path" CUSTOM_PROMPT=">> " $SHELL;
+  HISTFILE="$macro_path" CUSTOM_PROMPT="($1) >> " $SHELL;
 
   # Remove history timestamps if exists
   contents=$(cat "$macro_path" | strip_history_timestamp);
