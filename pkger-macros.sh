@@ -16,8 +16,6 @@ Commands:
   help                      - This dialog
 ";
 
-# TODO: Add guard
-
 get_package_path() { echo "package::$1"; }
 
 guard() { if [[ -z "$2" ]]; then echo "$1"; exit 1; fi; }
