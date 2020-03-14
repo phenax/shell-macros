@@ -40,7 +40,7 @@ macros start my_macro_to_do_stuff
 This will give you a new shell session to start executing your macro in.
 So you can go ahead and run your set of commands.
 
-When you are done, just run `exit` command to save and exit out of the session.
+When you are done, just run `exit` or press `Ctrl+D` to save and exit out of the session.
 ```bash
 exit
 ```
