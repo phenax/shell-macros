@@ -18,38 +18,52 @@ Commands:
 list() { ls -1 $MACROS_LIST_PATH; }
 get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
 
-guard() { if [[ -z "$1" ]]; then echo "$2"; exit 1; fi; }
-guard-package-name() { guard "$1" "Invalid package name"; }
+guard() { if [[ -z "$2" ]]; then echo "$1"; exit 1; fi; }
+
+guard-macro-name() {
+  guard "Invalid macro name" "$1";
+}
+
+guard-macro-not-exists() {
+  [[ ! -f "$(get-macro-path "$1")" ]] && \
+    guard "Macro '$1' does not exist";
+}
+guard-macro-already-exists() {
+  [[ -f "$(get-macro-path "$1")" ]] && \
+    guard "Macro '$1' already exists. To delete it, run 'macros delete $1'";
+}
+
+strip_history_timestamp() { sed 's/^\:\s\+[0-9: ]\+;//g'; }
 
 record() {
-  guard-package-name "$1";
+  guard-macro-name "$1";
+  guard-macro-already-exists "$1";
   local pkgPath=$(get-macro-path "$1");
 
-  [[ -f "$pkgPath" ]] && guard "" "Macro: '$1' already exists. To delete it, run 'macros delete $1'";
-
-  local currentDir=$(pwd);
-  cd "$DUMP_PATH";
+  # Start new shell
   HISTFILE="$pkgPath" CUSTOM_PROMPT=">> " $SHELL;
-  cd "$currentDir";
+
+  # Remove history timestamps if exists
+  contents=$(cat "$pkgPath" | strip_history_timestamp);
+  echo -e "$contents" > $pkgPath;
 }
 
 delete() {
-  guard-package-name "$1";
+  guard-macro-name "$1";
+  guard-macro-not-exists "$1";
   local pkgPath=$(get-macro-path "$1");
-  [[ ! -f "$pkgPath" ]] && guard "" "Macro '$1' does not exist";
+
+  # Delete session file
   rm "$pkgPath";
 }
 
 run() {
-  guard-package-name "$1";
+  guard-macro-name "$1";
+  guard-macro-not-exists "$1";
   local pkgPath=$(get-macro-path "$1");
 
-  [[ ! -f "$pkgPath" ]] && guard "" "Macro '$1' does not exist";
-
-  local currentDir=$(pwd);
-  cd "$DUMP_PATH";
-  cat $pkgPath | sed 's/^[0-9: ]\+;//g' | sed '/^(macros )?exit$/d' | $SHELL -;
-  cd "$currentDir";
+  # Read and execute each line
+  cat $pkgPath | $SHELL -;
 }
 
 case "$1" in
