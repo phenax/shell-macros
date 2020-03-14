@@ -55,13 +55,13 @@ macros run my_macro_to_do_stuff
 #### Adapter for bash
 Add this to the bottom of your `~/.bashrc`
 ```bash
-source $HOME/.shell-macros/adapters/bash;
+source $HOME/.config/shell-macros/adapters/bash;
 ```
 
 #### Adapter for zsh
 Add this to the bottom of your `~/.zshrc`
 ```bash
-source $HOME/.shell-macros/adapters/zsh;
+source $HOME/.config/shell-macros/adapters/zsh;
 ```
 
 
