@@ -36,6 +36,7 @@ record() {
 delete() {
   guard-package-name "$1";
   local pkgPath=$(get-macro-path "$1");
+  [[ ! -f "$pkgPath" ]] && guard "" "Macro '$1' does not exist";
   rm "$pkgPath";
 }
 
