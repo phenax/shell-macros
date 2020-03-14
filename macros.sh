@@ -15,7 +15,6 @@ Commands:
   help                  - This dialog
 ";
 
-list() { ls -1 $MACROS_LIST_PATH; }
 get-macro-path() { echo "$MACROS_LIST_PATH/$1"; }
 
 guard() { if [[ -z "$2" ]]; then echo "$1"; exit 1; fi; }
@@ -35,36 +34,43 @@ guard-macro-already-exists() {
 
 strip_history_timestamp() { sed 's/^\:\s\+[0-9: ]\+;//g'; }
 
+
+# Start recording a macro
 record() {
   guard-macro-name "$1";
   guard-macro-already-exists "$1";
-  local pkgPath=$(get-macro-path "$1");
+  local macro_path=$(get-macro-path "$1");
 
   # Start new shell
-  HISTFILE="$pkgPath" CUSTOM_PROMPT=">> " $SHELL;
+  HISTFILE="$macro_path" CUSTOM_PROMPT=">> " $SHELL;
 
   # Remove history timestamps if exists
-  contents=$(cat "$pkgPath" | strip_history_timestamp);
-  echo -e "$contents" > $pkgPath;
+  contents=$(cat "$macro_path" | strip_history_timestamp);
+  echo -e "$contents" > $macro_path;
 }
 
+# Delete existing macro
 delete() {
   guard-macro-name "$1";
   guard-macro-not-exists "$1";
-  local pkgPath=$(get-macro-path "$1");
+  local macro_path=$(get-macro-path "$1");
 
   # Delete session file
-  rm "$pkgPath";
+  rm "$macro_path";
 }
 
+# Execute a macro
 run() {
   guard-macro-name "$1";
   guard-macro-not-exists "$1";
-  local pkgPath=$(get-macro-path "$1");
+  local macro_path=$(get-macro-path "$1");
 
   # Read and execute each line
-  cat $pkgPath | $SHELL -;
+  cat $macro_path | $SHELL -;
 }
+
+# List all macros
+list() { ls -1 $MACROS_LIST_PATH; }
 
 case "$1" in
   start)   record "$2" ;;
