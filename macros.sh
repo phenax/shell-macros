@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-
 MACROS_PATH="$HOME/.config/shell-macros";
 source "$MACROS_PATH/default_config.sh";
 source "$MACROS_PATH/config.sh";
+source "$MACROS_PATH/colors.sh";
 
 HELP_TEXT="Usage: macros [command] <args>
 
@@ -16,7 +16,8 @@ Commands:
 
 get_macro_path() { echo "$MACROS_LIST_PATH/$1"; }
 
-guard() { if [[ -z "$2" ]]; then echo "$1"; exit 1; fi; }
+guard() { if [[ -z "$2" ]]; then echo -e "${COLOR_LIGHT_RED}Error:${COLOR_DEFAULT} $1"; exit 1; fi; }
+
 
 guard_macro_name() {
   guard "Invalid macro name" "$1";
