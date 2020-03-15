@@ -45,7 +45,7 @@ record() {
   local macro_path=$(get_macro_path "$1");
 
   # Start new shell
-  HISTFILE="$macro_path" CUSTOM_PROMPT=$(get_prompt "$1") $SHELL;
+  HISTFILE="$macro_path" CUSTOM_PROMPT="$(get_prompt "$1")" $SHELL;
 
   # Remove history timestamps if exists
   contents=$(cat "$macro_path" | strip_history_timestamp);
