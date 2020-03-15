@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 MACROS_PATH="$HOME/.config/shell-macros";
-
 source "$MACROS_PATH/default_config.sh";
 source "$MACROS_PATH/config.sh";
 
@@ -14,8 +13,6 @@ Commands:
   delete <macro name>   - Delete a macro
   help                  - This dialog
 ";
-
-get_prompt() { echo "($1) >> "; }
 
 get_macro_path() { echo "$MACROS_LIST_PATH/$1"; }
 
@@ -35,6 +32,9 @@ guard_macro_already_exists() {
 }
 
 strip_history_timestamp() { sed 's/^\:\s\+[0-9: ]\+;//g'; }
+
+# Append custom prompt and print command before running command
+append_prompt() { sed "s/.*/echo \"\"; echo '$(get_prompt "$1")\0'; \0/g"; }
 
 
 # Start recording a macro
@@ -68,7 +68,7 @@ run() {
   local macro_path=$(get_macro_path "$1");
 
   # Read and execute each line
-  cat $macro_path | $SHELL -;
+  cat $macro_path | append_prompt "$1" | $SHELL -;
 }
 
 # List all macros
